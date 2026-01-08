@@ -1,4 +1,4 @@
-module goastgateway
+module github.com/GoAstGateway/goastgateway
 
 go 1.25.4
 
