@@ -45,6 +45,12 @@ go build .
 でコンパイルが完了します。
 インストールはバイナリ(goastgateway)を /usr/local/bin にコピーしてください。それだけです。ご承知の通り、Goのバイナリは外部依存性がないので単独のファイルを配置するだけで動きます。
 
+使用しているライブラリは以下です。
+```
+github.com/golang-jwt/jwt/v5 v5.3.0
+github.com/gorilla/websocket v1.5.3
+```
+
 # 設定
 設定ファイルは2つありますが、基本的には goastgateway.json だけあれば大丈夫です。デフォルトの配置では /usr/local/etc にgoastgateway.jsonを置きます。
 
