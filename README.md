@@ -3,7 +3,7 @@
 # これは何？
 Asteriskはバージョン 23.0.0,22.6,0, 21.11.0, 20.16.0 以降で chan_websocket が使えるようになっています。これは従来までのPjSIP+Websocketではなく、Websocketでオーディオをやりとりするためのもので、端的にいうとAudiosocketをWebsocket対応にしたようなものです。ただし、Audiosocketは単純なAsteriskのapp_ですが、chan_websocketはチャネルとして動作します。つまり
 ```
-Dial(Websocket/endpoint-identidier)
+Dial(Websocket/endpoint-identifier)
 ```
 のようにしてDial()することができます。現在のところAsteriskのチャネルとしては『不完全』で、他のチャネルと全く同じように使えるわけではありません。ですがWebsocketによるTCPのオーディオを使って『通話』することが可能になりました。そこで、chan_websocketを使って「電話機」をつくってしまおうというのがこのプロジェクトです。
 
