@@ -1,0 +1,12 @@
+{
+  "G01": {
+    "strategy": "sequential",
+    "members": ["201", "202"],
+    "timeout": 30
+  },
+  "G02": {
+    "strategy": "ringall",
+    "members": ["201", "202"],
+    "timeout": 30
+  }
+}

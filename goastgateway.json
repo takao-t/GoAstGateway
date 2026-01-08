@@ -1,0 +1,14 @@
+{
+    "asterisk_addr": ":8765",
+    "browser_addr": ":8766",
+    "asterisk_format": "json",
+    "extension_variable": "WS_EXTEN",
+    "exten_search_pattern": "ws-ext-(\\w+)",
+    "cert_file": "/usr/local/ssl/192.168.254.234.pem",
+    "key_file": "/usr/local/ssl/192.168.254.234-key.pem",
+    "allowed_asterisk_ips": ["127.0.0.1"],
+    "allowed_browser_ips": ["127.0.0.1", "192.168.0.0/16"],
+    "allowed_origins": ["https://192.168.254.234", "https://192.168.254.234:8766"],
+    "jwt_secret": "CHANGE_THIS_TO_A_VERY_LONG_RANDOM_STRING",
+    "log_level": "DEBUG"
+}
