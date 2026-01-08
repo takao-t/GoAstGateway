@@ -59,7 +59,7 @@ github.com/gorilla/websocket v1.5.3
 {
     "asterisk_addr": ":8765",
     "browser_addr": ":8766",
-    "asterisk_format": "json",
+    "asterisk_format": "text",
     "extension_variable": "WS_EXTEN",
     "exten_search_pattern": "ws-ext-(\\w+)",
     "cert_file": "/usr/local/ssl/192.168.254.234.pem",
