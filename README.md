@@ -34,8 +34,53 @@ channel originate Local/2001@inhouse extension 0312345678@outgoing
 ```
 のようなCLIコマンドを実行すればinhouse contextの2001に発信し、2001が応答したらoutgoing contextを使って 0312345678 にダイヤルするようなことができますのでブラウザ側は着信さえちゃんとしていれば発信もできるというわけです。
 
+#メッセージフォーマット
+Asteriskから以下のようなメッセージが送られてきます。
+
+textの場合には
+```
+MEDIA_START connection_id:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx channel:WebSocket/ws-ext-2001 channel_id:pbx1-123456789.999 format:ulaw optimal_frame_size:160 ptime:20
+```
+channel:のWebsocket/ws-ext-2001 の/の後ろ、ws-ext-2001がAsteriskで設定したWebsocketのエンドポイント情報です。textモードの場合、GAGはこのエンドポイント情報を利用して内線番号として扱います。
+
+JSONの場合には
+```
+{
+    "event": "MEDIA_START",
+    "connection_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "channel": "WebSocket/ws-ext-2001",
+    "channel_id": "pbx1-123456789.999",
+    "format": "ulaw",
+    "optimal_frame_size": 160,
+    "ptime": 20,
+    "channel_variables": {
+        "WS_EXT": "2001"
+    }
+}
+```
+接続ID(エンドポイント情報)に加えてチャネル変数を渡すことができます。上の例ではWebsocketエンドポイントをws-ext-2001としていますが、複数の内線番号でエンドポイントを共通化し、例えば次のような使い方もできます。
+```
+{
+    "event": "MEDIA_START",
+    "connection_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "channel": "WebSocket/ws-connection",
+    "channel_id": "pbx1-123456789.999",
+    "format": "ulaw",
+    "optimal_frame_size": 160,
+    "ptime": 20,
+    "channel_variables": {
+        "WS_EXT": "2001"
+    }
+}
+```
+Websocketの接続としてはws-connectionというエンドポイントだけ定義しておき、WS_EXTというチャネル変数で内線番号を渡すことで、複数の内線番号用に同じエンドポイントが使えるようになります。
+
+これらの例からみてわかるように、おそらくchan_websocketは外部の音声AI等との接続の利便性から実装されたものと思われますが、音声をWebsocketでやりとりできるのであれば、Websocketで使える内線を作ってしまおうというのがこのプロジェクトというわけです。
+
+
 # プログラムの構成
 Geminiに「ゲートウェイ・デーモンを作りたい」と相談したら「そんなんはGoで作るのがベストだ」とか言うのでGoで実装しています。Goは不慣れだったのですが、このプロジェクトでだんだんわかるようになりました。
+Goなので依存性は少なく、Goのライブラリだけでスタンドアロン動作します。
 
 # ビルドとインストール
 githubからcloneなり何なりして入手したらGoの環境さえあれば
