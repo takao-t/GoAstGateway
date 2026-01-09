@@ -34,7 +34,7 @@ channel originate Local/2001@inhouse extension 0312345678@outgoing
 ```
 のようなCLIコマンドを実行すればinhouse contextの2001に発信し、2001が応答したらoutgoing contextを使って 0312345678 にダイヤルするようなことができますのでブラウザ側は着信さえちゃんとしていれば発信もできるというわけです。
 
-#メッセージフォーマット
+# メッセージフォーマット
 Asteriskから以下のようなメッセージが送られてきます。
 
 textの場合には
